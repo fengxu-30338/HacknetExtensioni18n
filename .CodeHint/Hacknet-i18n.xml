@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <HacknetEditorHint>
+    <Node name="HacknetExtension.SupportFollowSystemLanguages" enable="true" multi="false" desc="扩展支持的所有语言类型，配置了该标签后才能自适应游戏语言设置">
+        <Content default="en-us" desc="扩展支持的所有语言类型，多个用','隔开" hint="enum">
+            <Enums>
+                <Enum desc="英文">en-us</Enum>
+                <Enum desc="德语">de-de</Enum>
+                <Enum desc="法语">fr-be</Enum>
+                <Enum desc="俄语">ru-ru</Enum>
+                <Enum desc="西班牙语">es-ar</Enum>
+                <Enum desc="韩语">ko-kr</Enum>
+                <Enum desc="日语">ja-jp</Enum>
+                <Enum desc="中文">zh-cn</Enum>
+            </Enums>
+            <Diag type="E" ignoreCaseForEnum="false" jsRuleFor="override">
+                (function(actNode, hacknetNodeHolder, val){
+                    const allLangs = ['en-us','de-de','fr-be','ru-ru','es-ar','ko-kr','ja-jp','zh-cn'];
+                    var arr = val.split(',');
+                    for (let item of arr) {
+                        item = item.trim();
+                        if (!allLangs.includes(item.trim())) {
+                            return {type: 'E', msg: '不支持的语言类型:' + item.trim()}
+                        }
+                    }
+                })
+            </Diag>
+        </Content>
+    </Node>
+
     <Node name="**.locale-en" enable="true" multi="false" desc="父标签内容的英文版本（来源:Hacknet-Extension-i18n Mod功能）">
         <Content default="localization" desc="父标签内容的英文版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
     </Node>
