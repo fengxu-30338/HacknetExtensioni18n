@@ -9,18 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Hacknet.Extensions;
 
 namespace Hacknet_Extension_i18n.Patch
 {
     [HarmonyPatch]
     public class XmlReaderPatch
     {
+
+        private static readonly HashSet<string> supportLocales = new HashSet<string>()
+        {
+            "en","de","fr","ru","es","ko","ja","zh"
+        };
+
         private static void HandleLocaleAttribute(Dictionary<string, string> attributes)
         {
             foreach (var attributesKey in attributes.Keys.ToList())
             {
-
-
                 var idx = attributesKey.LastIndexOf("-", StringComparison.Ordinal);
                 if (idx < 0)
                 {
@@ -30,8 +35,13 @@ namespace Hacknet_Extension_i18n.Patch
                 var sourceName = attributesKey.Substring(0, idx);
                 var locale = attributesKey.Substring(idx + 1);
 
+                if (!supportLocales.Contains(locale))
+                {
+                    continue;
+                }
 
-                if (Settings.ActiveLocale.StartsWith(locale) && attributes.ContainsKey(sourceName))
+
+                if (Settings.ActiveLocale.StartsWith(locale))
                 {
                     attributes[sourceName] = attributes[attributesKey];
                 }
@@ -51,6 +61,12 @@ namespace Hacknet_Extension_i18n.Patch
                 }
 
                 var locale = child.Name.Substring("locale-".Length);
+
+                if (!supportLocales.Contains(locale))
+                {
+                    continue;
+                }
+
                 if (Settings.ActiveLocale.StartsWith(locale))
                 {
                     element.Content = child.Content;

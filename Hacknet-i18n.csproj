@@ -88,12 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hacknet-Extension-i18n.cs" />
+    <Compile Include="Patch\FollowSystemLanguagePatch.cs" />
     <Compile Include="Patch\XmlReaderPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "D:\Program Files (x86)\Steam\steamapps\common\Hacknet\Extensions\IntroExtension\Plugins\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
