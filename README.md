@@ -10,8 +10,6 @@ hacknet扩展国际化模组
 
 将dll文件放到扩展的Plugins目录下即可生效。
 
-
-
 ## 属性国际化
 
 ```xml
@@ -107,3 +105,37 @@ TheCageInside\HackerScripts\Locale\en-us\CHackPlayer.txt
 ```
 
 当您配置了SupportFollowSystemLanguages内容后，当游戏切换语言时，会自动读取扩展内对应的语言部分，不过不存在则会使用Language标签配置的语言。
+
+# AI自动翻译
+
+对于所有xml文件您可以使用AI配合提示词自动翻译，推荐提示词如下：
+
+```text
+将Actions文件夹及其子目录(深度遍历)下所有xml所有文件中所有用到中文的地方翻译为英文（只要不包含中文就不用管），忽略xml标签名，属性名，注释，要求：
+翻译后的英文不能直接替换原来的中文，你需要识别中文出现的位置，
+1.中文如果出现在xml元素的属性中，你应该增加一个属性并加上-en后缀，将翻译后的英文放到该属性中，比如原属性为name那么修改后属性名为name-en
+2.中文如果出现在xml元素的内容中，你应该在当前元素的内容末尾处追加一个locale-en元素并把翻译的英文放到该元素中
+3.如果元素内容中出现中英等多种语言包含的情况，将他们统一翻译为英文并且保持格式不变在元素内容末尾处追加locale-en元素并把翻译加过放到该元素中
+4.重构当前xml文档中翻译过的元素，使得该元素的所有属性独占一行
+5.每翻译一个文件需要询问我是否满意才可处理下一个文件
+```
+
+# 编辑器提示
+
+为了您的翻译体验，我建议您使用Visual Studio Code编辑器，因为它支持XML文件的语法高亮和智能提示。
+
+您可以在Visual Studio Code中安装以下插件来获得更好的翻译体验：
+
+- XML Tools: 提供XML文件的语法高亮和智能提示
+- [HacknetExtensionHelper](https://marketplace.visualstudio.com/items?itemName=fengxu30338.hacknetextensionhelper): 提供Hacknet扩展相关的智能提示
+
+如果您安装的HacknetExtensionHelper插件版本大于等于`0.3.1`，您可以在扩展根目录的Hacknet-EditorHint.xml文件中通过`Include`标签引用本Mod的[提示文件](.CodeHint/Hacknet-i18n.xml)
+
+```xml
+<!-- 扩展根目录下的Hacknet-EditorHint.xml-->
+<HacknetEditorHint>
+    <Include path=".CodeHint/Hacknet-i18n.xml" />
+</HacknetEditorHint>
+```
+
+

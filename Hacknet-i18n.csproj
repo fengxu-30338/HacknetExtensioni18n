@@ -95,7 +95,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)/README.md"       "$(ProjectDir)/dist/README.md"
+copy "$(ProjectDir)/README_en.md"  "$(ProjectDir)/dist/README_en.md"
+copy "$(TargetPath)" "$(ProjectDir)/dist/$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

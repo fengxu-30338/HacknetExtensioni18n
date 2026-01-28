@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HacknetEditorHint>
+    <Node name="**.locale-en" enable="true" multi="false" desc="父标签内容的英文版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的英文版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-de" enable="true" multi="false" desc="父标签内容的德语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的德语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-fr" enable="true" multi="false" desc="父标签内容的法语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的法语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-ru" enable="true" multi="false" desc="父标签内容的俄语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的俄语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-es" enable="true" multi="false" desc="父标签内容的西班牙语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的西班牙语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-ko" enable="true" multi="false" desc="父标签内容的韩语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的韩语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <Node name="**.locale-ja" enable="true" multi="false" desc="父标签内容的日语版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的日语版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+    
+    <Node name="**.locale-zh" enable="true" multi="false" desc="父标签内容的中文版本（来源:Hacknet-Extension-i18n Mod功能）">
+        <Content default="localization" desc="父标签内容的中文版本（来源:Hacknet-Extension-i18n Mod功能）" hint="enum" />
+    </Node>
+
+    <DynamicGenerateAttribute overwrite="false">
+        (function(actNode, hacknetNodeHolder){
+            const attrs = [];
+            const locales = ["en", "de", "fr", "ru", "es", "ko", "ja", "zh"];
+            const desc = ["英文", "德语", "法语", "俄语", "西班牙语", "韩语", "日语", "中文"];
+            for(const [key, val] of actNode.node.attribute) {
+                locales.forEach((item, idx) =&gt; {
+                    attrs.push(`&lt;Attribute name="${key}-${item}" required="false" desc="${key}属性的${desc[idx]}版本（来源:Hacknet-Extension-i18n Mod功能）" /&gt;`);
+                });
+            }
+
+            return attrs.join("\n");
+        })
+    </DynamicGenerateAttribute>
+
+</HacknetEditorHint>
