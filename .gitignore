@@ -25,6 +25,7 @@ mono_crash.*
 x64/
 x86/
 dist/
+.vscode/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
